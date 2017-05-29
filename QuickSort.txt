@@ -1,0 +1,54 @@
+/**
+ * Created by shang on 2017/3/19.
+ */
+public class Qsort {
+    public static void main(String[] args){
+        int[] arr = new int[]{98,45,68,35,48,13,66,4,88,45};
+        disPlay(arr);
+        qSort(arr);
+        disPlay(arr);
+    }
+    static void disPlay(int[] arr){
+        for (int i: arr){
+            System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+    static void qSort(int[] arr){
+        int left = 0;
+        int right = arr.length-1;
+        recSort(arr, left, right);
+    }
+    static void recSort(int[] arr, int left, int right){
+        if (left>=right){
+            return;
+        }
+        else {
+            int flag = right;
+            int partition = partionArr(arr, left, right, flag);
+            recSort(arr, left, partition-1);
+            recSort(arr, partition+1, right);
+        }
+    }
+    static int partionArr(int[] arr, int left, int right, int flag){
+        int l = left - 1;
+        int r = right;
+        while (true){
+            while (arr[++l]<arr[flag]);
+            while (arr[--r]>arr[flag]&&r>0);
+            if(l<r){
+                swap(arr, l, r);
+             }
+            else {
+                break;
+            }
+        }
+        swap(arr, l, right);
+        return l;
+    }
+    static void swap(int[] arr, int left, int right){
+        int tmp = arr[left];
+        arr[left] = arr[right];
+        arr[right] = tmp;
+    }
+}
